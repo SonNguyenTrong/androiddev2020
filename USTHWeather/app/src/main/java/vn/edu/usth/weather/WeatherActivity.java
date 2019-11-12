@@ -1,24 +1,24 @@
 package vn.edu.usth.weather;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentActivity;
 
 import android.os.Bundle;
 import android.util.Log;
 
-public class WeatherActivity extends AppCompatActivity {
+public class WeatherActivity extends FragmentActivity{
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         // load the layout
-        setContentView(R.layout.filters);
+        setContentView(R.layout.empty);
         Log.i("StatusWeatherLog","onCreate() method running...");
 
         // Create a new Fragment to be placed in the activity
         ForecastFragment firstFragment = new ForecastFragment();
 
         // Add the fragment to the 'container' FrameLayout
-        getSupportFragmentManager().beginTransaction().add(R.id.container, firstFragment).commit();
+        getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, firstFragment).commit();
     }
 
     @Override
