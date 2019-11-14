@@ -18,7 +18,7 @@ public class WeatherActivity extends FragmentActivity{
         ForecastFragment firstFragment = new ForecastFragment();
 
         // Add the fragment to the 'container' FrameLayout
-        getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, firstFragment).commit();
+        getSupportFragmentManager().beginTransaction().add(R.id.container, firstFragment).commit();
     }
 
     @Override
