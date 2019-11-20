@@ -9,5 +9,8 @@
         <item name="friday" type="string">Friday</item>
         <item name="saturday" type="string">Saturday</item>
         <item name="sunday" type="string">Sunday</item>
-    </string-array>>
+    </string-array>
+    <string name="weather_desc">12C \n Cloudy</string>
+    <string name="weather_loc">Paris</string>
+
 </resources>

@@ -14,11 +14,17 @@ public class WeatherActivity extends FragmentActivity{
         setContentView(R.layout.empty);
         Log.i("StatusWeatherLog","onCreate() method running...");
 
-        // Create a new Fragment to be placed in the activity
+        // Create Weather Fragment
+        WeatherFragment weatherFragment = new WeatherFragment();
+
+        // Create Forecast Fragment to be placed in the activity
         ForecastFragment firstFragment = new ForecastFragment();
 
-        // Add the fragment to the 'container' FrameLayout
-        getSupportFragmentManager().beginTransaction().add(R.id.container, firstFragment).commit();
+        // Add the Weather fragment to Layout
+        getSupportFragmentManager().beginTransaction().add(R.id.fragment_weather, weatherFragment).commit();
+
+        // Add the Forecast fragment to the 'container' FrameLayout
+        getSupportFragmentManager().beginTransaction().add(R.id.fragment_forecast, firstFragment).commit();
     }
 
     @Override
