@@ -10,10 +10,32 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+
 public class WeatherAndForecastFragment extends Fragment {
+    private String title;
+    private int page;
+
     public WeatherAndForecastFragment() {
         //empty constructor
     };
+
+    protected static WeatherAndForecastFragment newInstance(int page, String title) {
+        WeatherAndForecastFragment weatherAndForecastFragment = new WeatherAndForecastFragment();
+        Bundle var = new Bundle();
+        var.putInt("page", page);
+        var.putString("title", title);
+        weatherAndForecastFragment.setArguments(var);
+        return weatherAndForecastFragment;
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            page = getArguments().getInt("page");
+            title = getArguments().getString("title");
+        }
+    }
 
     @Nullable
     @Override

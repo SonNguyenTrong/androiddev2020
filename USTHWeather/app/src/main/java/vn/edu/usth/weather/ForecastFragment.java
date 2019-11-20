@@ -33,7 +33,7 @@ public class ForecastFragment extends Fragment {
             LinearLayout.LayoutParams child1 = new LinearLayout.LayoutParams(0,
                     LinearLayout.LayoutParams.MATCH_PARENT,3);
             LinearLayout.LayoutParams child2 = new LinearLayout.LayoutParams(0,
-                    LinearLayout.LayoutParams.MATCH_PARENT,2);
+                    150,2);
             LinearLayout.LayoutParams child3 = new LinearLayout.LayoutParams(0,
                     LinearLayout.LayoutParams.MATCH_PARENT,5);
             TextView textview = new TextView(getContext());
