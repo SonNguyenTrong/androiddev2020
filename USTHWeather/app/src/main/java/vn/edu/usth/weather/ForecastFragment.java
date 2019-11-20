@@ -14,6 +14,10 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 
 public class ForecastFragment extends Fragment {
+    public ForecastFragment() {
+        //empty constructor
+    };
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

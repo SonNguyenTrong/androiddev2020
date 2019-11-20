@@ -2,26 +2,15 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/container"
+    android:id="@+id/weatherForecastLinearLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".WeatherActivity"
     android:orientation="vertical"
     android:background="#ddddfc">
 
-    <fragment
-        android:id="@+id/fragment_weather"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:name="vn.edu.usth.weather.WeatherFragment"/>
-
-
-    <fragment
-        android:id="@+id/fragment_forecast"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:name="vn.edu.usth.weather.ForecastFragment"/>
-
-
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/ViewPager"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"/>
 </LinearLayout>

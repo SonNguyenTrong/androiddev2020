@@ -8,6 +8,9 @@ import android.view.ViewGroup;
 import androidx.fragment.app.Fragment;
 
 public class WeatherFragment extends Fragment {
+    public WeatherFragment() {
+        //empty constructor
+    };
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
