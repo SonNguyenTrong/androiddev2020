@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".WeatherActivity"
     android:orientation="vertical"
-    android:background="#ddddfc">
+    android:background="@color/colorMain">
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tab_layout"

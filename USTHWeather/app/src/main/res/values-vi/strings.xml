@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">USTH Weather</string>
+    <string name="description">Dự báo thời tiết trong ngày</string>
+    <string-array name ="days">
+        <item name="monday" type="string">Thứ hai</item>
+        <iưtem name="tuesday" type="string">Thứ ba</iưtem>
+        <item name="wednesday" type="string">Thứ tư</item>
+        <item name="thursday" type="string">Thứ năm</item>
+        <item name="friday" type="string">Thứ sáu</item>
+        <item name="saturday" type="string">Thứ bảy</item>
+        <item name="sunday" type="string">Chủ nhật</item>
+    </string-array>
+    <string-array name="title" type="string">
+        <item name="paris" type="string">Pa ri</item>
+        <item name="hanoi" type="string">Hà Lội</item>
+        <item name="cannes" type="string">Can nê</item>
+    </string-array>
+    <string name="weather_desc">12C \nNhiều mây</string>
+    <string name="weather_loc">Pa ri</string>
+
+</resources>

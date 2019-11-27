@@ -10,6 +10,11 @@
         <item name="saturday" type="string">Saturday</item>
         <item name="sunday" type="string">Sunday</item>
     </string-array>
+    <string-array name="title">
+        <item name="paris" type="string">Paris</item>
+        <item name="hanoi" type="string">Hanoi</item>
+        <item name="cannes" type="string">Cannes</item>
+    </string-array>
     <string name="weather_desc">12C \n Cloudy</string>
     <string name="weather_loc">Paris</string>
 

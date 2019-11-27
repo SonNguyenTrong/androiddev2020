@@ -5,14 +5,17 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
+import android.content.Context;
 import android.os.Bundle;
 
 public class Adapter extends FragmentPagerAdapter {
+    private Context _context;
     private final int page_count =3;
-    private String titles[] = new String[]{"Page 1", "Page n", "Page infinite"};
+    private String titles[] = null;
 
-    public Adapter(FragmentManager fm){
+    public Adapter(FragmentManager fm, Context c){
         super(fm);
+        _context = c;
     }
 
     @Override
@@ -24,6 +27,7 @@ public class Adapter extends FragmentPagerAdapter {
     public Fragment getItem(int page) {
         WeatherAndForecastFragment weatherAndForecastFragment = new WeatherAndForecastFragment();
         Bundle bundle = new Bundle();
+        titles = _context.getResources().getStringArray(R.array.title);
         switch (page) {
             case 0: return WeatherAndForecastFragment.newInstance(0, titles[0]);
             case 1: return WeatherAndForecastFragment.newInstance(1, titles[1]);
