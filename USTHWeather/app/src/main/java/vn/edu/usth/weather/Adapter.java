@@ -16,6 +16,7 @@ public class Adapter extends FragmentPagerAdapter {
     public Adapter(FragmentManager fm, Context c){
         super(fm);
         _context = c;
+        titles = _context.getResources().getStringArray(R.array.title);
     }
 
     @Override
@@ -27,7 +28,6 @@ public class Adapter extends FragmentPagerAdapter {
     public Fragment getItem(int page) {
         WeatherAndForecastFragment weatherAndForecastFragment = new WeatherAndForecastFragment();
         Bundle bundle = new Bundle();
-        titles = _context.getResources().getStringArray(R.array.title);
         switch (page) {
             case 0: return WeatherAndForecastFragment.newInstance(0, titles[0]);
             case 1: return WeatherAndForecastFragment.newInstance(1, titles[1]);

@@ -4,7 +4,7 @@
     <string name="description">Dự báo thời tiết trong ngày</string>
     <string-array name ="days">
         <item name="monday" type="string">Thứ hai</item>
-        <iưtem name="tuesday" type="string">Thứ ba</iưtem>
+        <item name="tuesday" type="string">Thứ ba</item>
         <item name="wednesday" type="string">Thứ tư</item>
         <item name="thursday" type="string">Thứ năm</item>
         <item name="friday" type="string">Thứ sáu</item>
