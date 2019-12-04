@@ -11,6 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme" >
         <activity android:name=".Adapter"/>
+        <activity android:name=".PrefActivity"/>
         <activity android:name=".WeatherActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

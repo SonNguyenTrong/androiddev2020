@@ -1,12 +1,20 @@
 package vn.edu.usth.weather;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager.widget.ViewPager;
+import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.media.MediaPlayer;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.google.android.material.tabs.TabLayout;
 
@@ -20,6 +28,7 @@ public class WeatherActivity extends FragmentActivity{
     private ViewPager viewPager;
     private Adapter adapter;
     private MediaPlayer music;
+    private Toolbar my_toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -49,7 +58,7 @@ public class WeatherActivity extends FragmentActivity{
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         tabLayout.setupWithViewPager(viewPager);
 
-        //music player
+        //Music player
         copyFileToExternalStorage(R.raw.alliwant, "alliwant.mp3");
 
         music = MediaPlayer.create(this, R.raw.alliwant);
@@ -77,6 +86,29 @@ public class WeatherActivity extends FragmentActivity{
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+        switch (id) {
+            case R.id.refresh:
+                Toast.makeText(getApplicationContext(), "Refresh successfully!", Toast.LENGTH_LONG).show();
+                return true;
+            case R.id.settings:
+                Intent intent = new Intent(this, PrefActivity.class);
+                startActivity(intent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
     }
 

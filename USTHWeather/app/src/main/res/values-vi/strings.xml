@@ -2,6 +2,7 @@
 <resources>
     <string name="app_name">USTH Weather</string>
     <string name="description">Dự báo thời tiết trong ngày</string>
+    <string name="refresh">Cập nhật</string>
     <string-array name ="days">
         <item name="monday" type="string">Thứ hai</item>
         <item name="tuesday" type="string">Thứ ba</item>
@@ -18,5 +19,6 @@
     </string-array>
     <string name="weather_desc">12C \nNhiều mây</string>
     <string name="weather_loc">Pa ri</string>
+    <string name="hello_blank_fragment">Hê lô fờ rác mần rỗng </string>
 
 </resources>
