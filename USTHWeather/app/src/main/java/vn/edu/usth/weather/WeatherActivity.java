@@ -24,6 +24,10 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.toolbox.ImageRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.material.tabs.TabLayout;
 
 import java.io.FileNotFoundException;
@@ -70,7 +74,7 @@ public class WeatherActivity extends FragmentActivity{
         // Add the Forecast fragment to the 'container' FrameLayout
         //getSupportFragmentManager().beginTransaction().add(R.id.fragment_forecast, firstFragment).commit();
 
-        new GetRequestImage().execute("https://ictlab.usth.edu.vn/wp-content/uploads/logos/usth.png");
+        //new GetRequestImage().execute("https://ictlab.usth.edu.vn/wp-content/uploads/logos/usth.png");
 
         // Add view pager for 2 fragment
         viewPager = findViewById(R.id.ViewPager);
@@ -87,6 +91,23 @@ public class WeatherActivity extends FragmentActivity{
         music = MediaPlayer.create(this, R.raw.alliwant);
         music.start();
 
+        //Prac 16
+        RequestQueue queue = Volley.newRequestQueue(this);
+        queue.add(getImageRequest());
+    }
+
+    public ImageRequest getImageRequest() {
+        Response.Listener<Bitmap> listener = new Response.Listener<Bitmap>() {
+            @Override
+            public void onResponse(Bitmap response) {
+                ImageView iv = (ImageView) findViewById(R.id.logo);
+                iv.setImageBitmap(response);
+            }
+        };
+        ImageRequest imageRequest = new ImageRequest("https://ictlab.usth.edu.vn/wp-content/uploads/logos/usth.png",
+                listener, 0, 0, ImageView.ScaleType.CENTER,
+                Bitmap.Config.ARGB_8888, null);
+        return imageRequest;
 
     }
 

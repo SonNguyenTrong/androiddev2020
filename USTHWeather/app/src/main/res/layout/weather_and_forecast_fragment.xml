@@ -17,5 +17,5 @@
             android:name="vn.edu.usth.weather.ForecastFragment"
             android:background="@color/colorBlue">
         </FrameLayout>
-    
+
 </LinearLayout>
