@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.view.View;
 
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -27,6 +28,7 @@ public class ForecastFragment extends Fragment {
         View view = inflater.inflate(R.layout.forecast_fragment, container, false);
         LinearLayout fragment_container = view.findViewById(R.id
                 .fragment_container);
+
         for (int i = 0; i < 7; i++ ) {
             LinearLayout.LayoutParams parent = new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.MATCH_PARENT, 0 ,1);

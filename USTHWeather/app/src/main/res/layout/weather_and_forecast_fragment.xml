@@ -10,10 +10,12 @@
         android:id="@+id/weatherFragment"
         android:name="vn.edu.usth.weather.WeatherFragment"/>
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/forecastFragment"
-        android:name="vn.edu.usth.weather.ForecastFragment"
-        android:background="@color/colorBlue"/>
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/forecastFragment"
+            android:name="vn.edu.usth.weather.ForecastFragment"
+            android:background="@color/colorBlue">
+        </FrameLayout>
+    
 </LinearLayout>

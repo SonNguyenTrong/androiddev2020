@@ -8,6 +8,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.media.MediaPlayer;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -19,6 +21,7 @@ import android.os.Message;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.material.tabs.TabLayout;
@@ -27,6 +30,9 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 public class WeatherActivity extends FragmentActivity{
 
@@ -64,6 +70,8 @@ public class WeatherActivity extends FragmentActivity{
         // Add the Forecast fragment to the 'container' FrameLayout
         //getSupportFragmentManager().beginTransaction().add(R.id.fragment_forecast, firstFragment).commit();
 
+        new GetRequestImage().execute("https://ictlab.usth.edu.vn/wp-content/uploads/logos/usth.png");
+
         // Add view pager for 2 fragment
         viewPager = findViewById(R.id.ViewPager);
         adapter = new Adapter(getSupportFragmentManager(),this);
@@ -78,38 +86,36 @@ public class WeatherActivity extends FragmentActivity{
 
         music = MediaPlayer.create(this, R.raw.alliwant);
         music.start();
+
+
     }
 
-    private class AsyncTaskRunner extends AsyncTask<String, String, String> {
-        private String resp;
-        ProgressDialog progressDialog;
+    private class GetRequestImage extends AsyncTask<String, Void, Bitmap> {
+        private ProgressDialog progressDialog;
 
         @Override
-        protected String doInBackground(String... params) {
+        protected Bitmap doInBackground(String... params) {
             try {
-                Thread.sleep(5000);
-                resp = "Sleep for 5 seconds";
-            } catch (InterruptedException e) {
+                URL url = new URL(params[0]);
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                connection.connect();
+
+                InputStream inputStream = connection.getInputStream();
+                Bitmap myBitmap = BitmapFactory.decodeStream(inputStream);
+                return myBitmap;
+            } catch (MalformedURLException e) {
                 e.printStackTrace();
-                resp = e.getMessage();
             } catch (Exception e) {
-                e.printStackTrace();
-                resp = e.getMessage();
             }
-            return resp;
+            return null;
         }
 
         @Override
-        protected void onPostExecute(String result) {
-            // execution of result of Long time consuming operation
+        protected void onPostExecute(Bitmap bitmap) {
+            super.onPostExecute(bitmap);
             progressDialog.dismiss();
-            // Assume that we got our data from server
-            Bundle bundle = new Bundle();
-            bundle.putString("server_response", "some sample json here");
-            // notify main thread
-            Message msg = new Message();
-            msg.setData(bundle);
-            handler.sendMessage(msg);
+            ImageView imageView = (ImageView) findViewById(R.id.logo);
+            imageView.setImageBitmap(bitmap);
         }
 
         @Override
@@ -120,8 +126,8 @@ public class WeatherActivity extends FragmentActivity{
         }
 
         @Override
-        protected void onProgressUpdate(String... text) {
-            // Do something here
+        protected void onProgressUpdate(Void... values) {
+            super.onProgressUpdate(values);
         }
     }
 
@@ -161,8 +167,8 @@ public class WeatherActivity extends FragmentActivity{
         int id = item.getItemId();
         switch (id) {
             case R.id.refresh:
-                AsyncTaskRunner runner = new AsyncTaskRunner();
-                runner.execute("5000");
+//                AsyncTaskRunner runner = new AsyncTaskRunner();
+//                runner.execute("5000");
                 return true;
             case R.id.settings:
                 Intent intent = new Intent(this, PrefActivity.class);

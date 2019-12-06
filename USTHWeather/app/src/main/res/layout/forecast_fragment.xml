@@ -2,11 +2,10 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="10dp"
-    android:focusableInTouchMode="true"
-    android:orientation="vertical">
-    
+    android:layout_height="match_parent"
+    android:layout_margin="10dp">
+
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -17,6 +16,5 @@
             android:weightSum="7"
             android:orientation="vertical"/>
     </ScrollView>
-
 
 </LinearLayout>
