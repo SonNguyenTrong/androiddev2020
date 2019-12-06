@@ -11,6 +11,9 @@ import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -63,6 +66,39 @@ public class WeatherActivity extends FragmentActivity{
 
         music = MediaPlayer.create(this, R.raw.alliwant);
         music.start();
+
+        //thread
+        final Handler handler = new Handler(Looper.getMainLooper()) {
+            @Override
+            public void handleMessage(Message msg) {
+                // This method is executed in main thread
+                String content = msg.getData().getString("server_response");
+                Toast.makeText(getApplicationContext(), content, Toast.LENGTH_LONG).show();
+            }
+        };
+
+        Thread t = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                // this method is run in a worker thread
+                try {
+                    // wait for 10 seconds to simulate a long network access
+                    Thread.sleep(10000);
+                }
+                catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                // Assume that we got our data from server
+                Bundle bundle = new Bundle();
+                bundle.putString("server_response", "some sample json here");
+                // notify main thread
+                Message msg = new Message();
+                msg.setData(bundle);
+                handler.sendMessage(msg);
+            }
+        });
+
+        t.start();
 
     }
 

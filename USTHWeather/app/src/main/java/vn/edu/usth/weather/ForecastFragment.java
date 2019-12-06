@@ -39,6 +39,7 @@ public class ForecastFragment extends Fragment {
             TextView textview = new TextView(getContext());
             textview.setText(getResources().getStringArray(R.array.days)[i]);
             textview.setGravity(Gravity.CENTER);
+            textview.setTextColor(getResources().getColor(R.color.colorBlack));
             textview.setLayoutParams(child1);
 
             ImageView imageview = new ImageView(getContext());
@@ -49,6 +50,7 @@ public class ForecastFragment extends Fragment {
             TextView desc = new TextView(getContext());
             desc.setText(R.string.description);
             desc.setGravity(Gravity.CENTER);
+            desc.setTextColor(getResources().getColor(R.color.colorBlack));
             desc.setLayoutParams(child3);
 
             LinearLayout layout = new LinearLayout(getContext());
