@@ -6,8 +6,10 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.media.MediaPlayer;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
@@ -31,7 +33,15 @@ public class WeatherActivity extends FragmentActivity{
     private ViewPager viewPager;
     private Adapter adapter;
     private MediaPlayer music;
-    private Toolbar my_toolbar;
+
+    final Handler handler = new Handler(Looper.getMainLooper()) {
+        @Override
+        public void handleMessage(Message msg) {
+            // This method is executed in main thread
+            String content = msg.getData().getString("server_response");
+            Toast.makeText(getApplicationContext(), content, Toast.LENGTH_LONG).show();
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -39,6 +49,8 @@ public class WeatherActivity extends FragmentActivity{
         // load the layout
         setContentView(R.layout.empty);
         Log.i("StatusWeatherLog","onCreate() method running...");
+
+
 
         // Create Weather Fragment
         //WeatherFragment weatherFragment = new WeatherFragment();
@@ -66,41 +78,53 @@ public class WeatherActivity extends FragmentActivity{
 
         music = MediaPlayer.create(this, R.raw.alliwant);
         music.start();
-
-        //thread
-        final Handler handler = new Handler(Looper.getMainLooper()) {
-            @Override
-            public void handleMessage(Message msg) {
-                // This method is executed in main thread
-                String content = msg.getData().getString("server_response");
-                Toast.makeText(getApplicationContext(), content, Toast.LENGTH_LONG).show();
-            }
-        };
-
-        Thread t = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                // this method is run in a worker thread
-                try {
-                    // wait for 10 seconds to simulate a long network access
-                    Thread.sleep(10000);
-                }
-                catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                // Assume that we got our data from server
-                Bundle bundle = new Bundle();
-                bundle.putString("server_response", "some sample json here");
-                // notify main thread
-                Message msg = new Message();
-                msg.setData(bundle);
-                handler.sendMessage(msg);
-            }
-        });
-
-        t.start();
-
     }
+
+    private class AsyncTaskRunner extends AsyncTask<String, String, String> {
+        private String resp;
+        ProgressDialog progressDialog;
+
+        @Override
+        protected String doInBackground(String... params) {
+            try {
+                Thread.sleep(5000);
+                resp = "Sleep for 5 seconds";
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+                resp = e.getMessage();
+            } catch (Exception e) {
+                e.printStackTrace();
+                resp = e.getMessage();
+            }
+            return resp;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            // execution of result of Long time consuming operation
+            progressDialog.dismiss();
+            // Assume that we got our data from server
+            Bundle bundle = new Bundle();
+            bundle.putString("server_response", "some sample json here");
+            // notify main thread
+            Message msg = new Message();
+            msg.setData(bundle);
+            handler.sendMessage(msg);
+        }
+
+        @Override
+        protected void onPreExecute() {
+            progressDialog = ProgressDialog.show(WeatherActivity.this,
+                    "Updating weather...",
+                    "Wait for few seconds!");
+        }
+
+        @Override
+        protected void onProgressUpdate(String... text) {
+            // Do something here
+        }
+    }
+
 
     private void copyFileToExternalStorage(int resourceId, String resourceName) {
         String pathSDCard = Environment.getExternalStorageDirectory()
@@ -137,7 +161,8 @@ public class WeatherActivity extends FragmentActivity{
         int id = item.getItemId();
         switch (id) {
             case R.id.refresh:
-                Toast.makeText(getApplicationContext(), "Refresh successfully!", Toast.LENGTH_LONG).show();
+                AsyncTaskRunner runner = new AsyncTaskRunner();
+                runner.execute("5000");
                 return true;
             case R.id.settings:
                 Intent intent = new Intent(this, PrefActivity.class);
