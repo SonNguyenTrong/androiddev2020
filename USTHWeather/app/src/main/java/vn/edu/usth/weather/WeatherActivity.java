@@ -10,6 +10,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.Image;
 import android.media.MediaPlayer;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -22,13 +23,21 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.tabs.TabLayout;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -80,6 +89,7 @@ public class WeatherActivity extends FragmentActivity{
         viewPager = findViewById(R.id.ViewPager);
         adapter = new Adapter(getSupportFragmentManager(),this);
         viewPager.setAdapter(adapter);
+        viewPager.setOffscreenPageLimit(2);
 
         //Add tab layout
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
@@ -92,9 +102,11 @@ public class WeatherActivity extends FragmentActivity{
         music.start();
 
         //Prac 16
-        RequestQueue queue = Volley.newRequestQueue(this);
-        queue.add(getImageRequest());
+        MySingleTon.getInstance(WeatherActivity.this).addToRequestQue(getImageRequest());
+
     }
+
+
 
     public ImageRequest getImageRequest() {
         Response.Listener<Bitmap> listener = new Response.Listener<Bitmap>() {
